@@ -1,0 +1,50 @@
+[
+  {
+    "_id": { "$oid": "500000000000000000000001" },
+    "username": "newowner1",
+    "password": "$2b$10$bVcgSr0cOSqhZcLYcaNluuuxwbQMp69MHU8WngqZAR8iO0kbJLAfO",
+    "firstName": "Petar",
+    "lastName": "Markovic",
+    "gender": "M",
+    "address": "Divcibare Center, Divcibare",
+    "phone": "+381691112233",
+    "email": "petar.markovic@example.com",
+    "profilePicture": "/uploads/default-profile.png",
+    "creditCard": "4539999999999999",
+    "userType": "owner",
+    "status": "pending",
+    "createdAt": { "$date": "2025-02-01T09:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "500000000000000000000002" },
+    "username": "newtourist1",
+    "password": "$2b$10$bVcgSr0cOSqhZcLYcaNluuuxwbQMp69MHU8WngqZAR8iO0kbJLAfO",
+    "firstName": "Milica",
+    "lastName": "Stankovic",
+    "gender": "F",
+    "address": "Bulevar Kralja Aleksandra 45, Belgrade",
+    "phone": "+381654443322",
+    "email": "milica.stankovic@example.com",
+    "profilePicture": "/uploads/default-profile.png",
+    "creditCard": "5555555555554444",
+    "userType": "tourist",
+    "status": "pending",
+    "createdAt": { "$date": "2025-02-03T14:20:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "500000000000000000000003" },
+    "username": "rejecteduser",
+    "password": "$2b$10$bVcgSr0cOSqhZcLYcaNluuuxwbQMp69MHU8WngqZAR8iO0kbJLAfO",
+    "firstName": "Rejected",
+    "lastName": "User",
+    "gender": "M",
+    "address": "Test Street 1",
+    "phone": "+381600000000",
+    "email": "rejected@example.com",
+    "profilePicture": "/uploads/default-profile.png",
+    "creditCard": "0000000000000000",
+    "userType": "tourist",
+    "status": "rejected",
+    "createdAt": { "$date": "2025-01-25T10:00:00.000Z" }
+  }
+]

@@ -1,0 +1,306 @@
+<div class="admin-dashboard">
+  <header>
+    <h2>Admin Dashboard</h2>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </header>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button
+      class="tab-btn"
+      [class.active]="activeTab === 'requests'"
+      (click)="switchTab('requests')"
+    >
+      Registration Requests
+    </button>
+    <button
+      class="tab-btn"
+      [class.active]="activeTab === 'users'"
+      (click)="switchTab('users')"
+    >
+      User Management
+    </button>
+    <button
+      class="tab-btn"
+      [class.active]="activeTab === 'cottages'"
+      (click)="switchTab('cottages')"
+    >
+      Cottage Management
+    </button>
+  </div>
+
+  <!-- Messages -->
+  <div class="success-message" *ngIf="successMessage">
+    {{ successMessage }}
+  </div>
+
+  <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <div class="loading" *ngIf="isLoading">Loading...</div>
+
+  <!-- Registration Requests Tab -->
+  <div class="tab-content" *ngIf="activeTab === 'requests' && !isLoading">
+    <div class="no-data" *ngIf="requests.length === 0">
+      No pending registration requests.
+    </div>
+
+    <div class="data-table" *ngIf="requests.length > 0">
+      <table>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Type</th>
+            <th>Gender</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let request of requests">
+            <td>{{ request.username }}</td>
+            <td>{{ request.firstName }} {{ request.lastName }}</td>
+            <td>{{ request.email }}</td>
+            <td>
+              <span
+                class="badge"
+                [class.badge-owner]="request.userType === 'owner'"
+                [class.badge-tourist]="request.userType === 'tourist'"
+              >
+                {{ request.userType }}
+              </span>
+            </td>
+            <td>{{ request.gender }}</td>
+            <td>{{ request.phone }}</td>
+            <td>{{ request.address }}</td>
+            <td class="actions">
+              <button class="btn-approve" (click)="approveRequest(request.id!)">
+                Approve
+              </button>
+              <button class="btn-reject" (click)="rejectRequest(request.id!)">
+                Reject
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Users Tab -->
+  <div class="tab-content" *ngIf="activeTab === 'users' && !isLoading">
+    <div class="no-data" *ngIf="users.length === 0">No users found.</div>
+
+    <div class="data-table" *ngIf="users.length > 0">
+      <table>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let user of users"
+            [class.editing]="editingUser?.id === user.id"
+          >
+            <td>{{ user.username }}</td>
+            <td>
+              <span *ngIf="editingUser?.id !== user.id">
+                {{ user.firstName }} {{ user.lastName }}
+              </span>
+              <span *ngIf="editingUser?.id === user.id">
+                <input
+                  type="text"
+                  [(ngModel)]="editForm.firstName"
+                  placeholder="First Name"
+                  class="edit-input"
+                />
+                <input
+                  type="text"
+                  [(ngModel)]="editForm.lastName"
+                  placeholder="Last Name"
+                  class="edit-input"
+                />
+              </span>
+            </td>
+            <td>
+              <span *ngIf="editingUser?.id !== user.id">{{ user.email }}</span>
+              <span *ngIf="editingUser?.id === user.id">
+                <input
+                  type="email"
+                  [(ngModel)]="editForm.email"
+                  placeholder="Email"
+                  class="edit-input"
+                />
+              </span>
+            </td>
+            <td>
+              <span *ngIf="editingUser?.id !== user.id">{{ user.phone }}</span>
+              <span *ngIf="editingUser?.id === user.id">
+                <input
+                  type="text"
+                  [(ngModel)]="editForm.phone"
+                  placeholder="Phone"
+                  class="edit-input"
+                />
+              </span>
+            </td>
+            <td>
+              <span
+                class="badge"
+                [class.badge-owner]="user.userType === 'owner'"
+                [class.badge-tourist]="user.userType === 'tourist'"
+              >
+                {{ user.userType }}
+              </span>
+            </td>
+            <td>
+              <span
+                class="status-badge"
+                [class.status-active]="user.isActive"
+                [class.status-inactive]="!user.isActive"
+              >
+                {{ user.isActive ? "Active" : "Inactive" }}
+              </span>
+            </td>
+            <td class="actions">
+              <span *ngIf="editingUser?.id !== user.id">
+                <button class="btn-edit" (click)="startEditUser(user)">
+                  Edit
+                </button>
+                <button
+                  class="btn-toggle"
+                  [class.btn-deactivate]="user.isActive"
+                  [class.btn-activate]="!user.isActive"
+                  (click)="toggleUserStatus(user)"
+                >
+                  {{ user.isActive ? "Deactivate" : "Activate" }}
+                </button>
+                <button class="btn-delete" (click)="deleteUser(user)">
+                  Delete
+                </button>
+              </span>
+              <span *ngIf="editingUser?.id === user.id">
+                <button class="btn-save" (click)="saveUser()">Save</button>
+                <button class="btn-cancel" (click)="cancelEditUser()">
+                  Cancel
+                </button>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Cottages Tab -->
+  <div class="tab-content" *ngIf="activeTab === 'cottages' && !isLoading">
+    <div class="no-data" *ngIf="cottages.length === 0">No cottages found.</div>
+
+    <div class="data-table" *ngIf="cottages.length > 0">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Owner</th>
+            <th>Price/Night</th>
+            <th>Avg Rating</th>
+            <th>Last 3 Ratings</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let cottage of cottages"
+            [class.highlight-danger]="cottage.needsAttention"
+          >
+            <td>{{ cottage.name }}</td>
+            <td>{{ cottage.location }}</td>
+            <td>
+              <span *ngIf="cottage.ownerId">
+                {{ cottage.ownerId.firstName }} {{ cottage.ownerId.lastName }}
+              </span>
+            </td>
+            <td>${{ cottage.pricePerNight }}</td>
+            <td>
+              <span class="rating-display">
+                {{ cottage.averageRating || "N/A" }}
+                <span class="rating-count" *ngIf="cottage.totalRatings">
+                  ({{ cottage.totalRatings }})
+                </span>
+              </span>
+            </td>
+            <td>
+              <span
+                *ngIf="
+                  cottage.lastThreeRatings &&
+                  cottage.lastThreeRatings.length > 0
+                "
+              >
+                <span
+                  *ngFor="let rating of cottage.lastThreeRatings"
+                  class="rating-badge"
+                  [class.rating-low]="rating < 2"
+                >
+                  {{ rating }}
+                </span>
+              </span>
+              <span
+                *ngIf="
+                  !cottage.lastThreeRatings ||
+                  cottage.lastThreeRatings.length === 0
+                "
+              >
+                N/A
+              </span>
+            </td>
+            <td>
+              <span
+                *ngIf="cottage.isBlocked"
+                class="status-badge status-blocked"
+                [title]="'Blocked until ' + cottage.blockedUntil"
+              >
+                Blocked ({{ getBlockedTimeRemaining(cottage) }})
+              </span>
+              <span
+                *ngIf="!cottage.isBlocked"
+                class="status-badge status-active"
+              >
+                Active
+              </span>
+            </td>
+            <td class="actions">
+              <button
+                *ngIf="!cottage.isBlocked && cottage.needsAttention"
+                class="btn-block"
+                (click)="blockCottage(cottage)"
+              >
+                Temporarily Block
+              </button>
+              <button
+                *ngIf="cottage.isBlocked"
+                class="btn-unblock"
+                (click)="unblockCottage(cottage)"
+              >
+                Unblock
+              </button>
+              <span *ngIf="!cottage.isBlocked && !cottage.needsAttention">
+                -
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

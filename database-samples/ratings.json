@@ -1,0 +1,226 @@
+[
+  {
+    "_id": { "$oid": "900000000000000000000001" },
+    "cottageId": { "$oid": "700000000000000000000001" },
+    "touristId": { "$oid": "600000000000000000000003" },
+    "rating": 5,
+    "comment": "Absolutely wonderful cottage! The mountain views were breathtaking and the fireplace kept us cozy all night. Highly recommend for families!",
+    "createdAt": { "$date": "2025-01-21T10:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "900000000000000000000002" },
+    "cottageId": { "$oid": "700000000000000000000004" },
+    "touristId": { "$oid": "600000000000000000000002" },
+    "rating": 4,
+    "comment": "Great eco-friendly place. Loved the organic breakfast and the hiking trails nearby. Only minor issue was spotty WiFi.",
+    "createdAt": { "$date": "2025-01-26T09:15:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "900000000000000000000003" },
+    "cottageId": { "$oid": "700000000000000000000002" },
+    "touristId": { "$oid": "600000000000000000000002" },
+    "rating": 5,
+    "comment": "Perfect ski lodge! Right next to the slopes, and the hot tub after skiing was amazing. Will definitely come back next winter.",
+    "createdAt": { "$date": "2025-02-16T14:30:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "900000000000000000000004" },
+    "cottageId": { "$oid": "700000000000000000000001" },
+    "touristId": { "$oid": "600000000000000000000002" },
+    "rating": 5,
+    "comment": "Amazing stay in Zlatibor! The cottage was clean, well-equipped, and in a perfect location for exploring the area.",
+    "createdAt": { "$date": "2024-12-21T16:45:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "900000000000000000000005" },
+    "cottageId": { "$oid": "700000000000000000000006" },
+    "touristId": { "$oid": "60000000000000000000000A" },
+    "rating": 4,
+    "comment": "Lovely forest hideaway! Very peaceful and relaxing. Perfect for disconnecting from technology.",
+    "createdAt": { "$date": "2024-12-06T10:30:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "900000000000000000000006" },
+    "cottageId": { "$oid": "700000000000000000000007" },
+    "touristId": { "$oid": "60000000000000000000000D" },
+    "rating": 5,
+    "comment": "Authentic Serbian experience! The home-cooked meals were delicious and the hosts were very welcoming.",
+    "createdAt": { "$date": "2024-11-19T12:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "900000000000000000000007" },
+    "cottageId": { "$oid": "700000000000000000000008" },
+    "touristId": { "$oid": "60000000000000000000000E" },
+    "rating": 5,
+    "comment": "Spa cottage exceeded expectations! The thermal spring access was amazing. Very relaxing weekend.",
+    "createdAt": { "$date": "2024-10-26T15:20:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "900000000000000000000008" },
+    "cottageId": { "$oid": "700000000000000000000009" },
+    "touristId": { "$oid": "60000000000000000000000D" },
+    "rating": 5,
+    "comment": "Luxury ski chalet is worth every penny! Spacious, beautiful views, and everything we needed for a perfect ski vacation.",
+    "createdAt": { "$date": "2025-01-03T11:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "900000000000000000000009" },
+    "cottageId": { "$oid": "70000000000000000000000C" },
+    "touristId": { "$oid": "60000000000000000000000A" },
+    "rating": 4,
+    "comment": "Great winter cabin! Close to ski slopes and very cozy. The sunset views are incredible.",
+    "createdAt": { "$date": "2024-12-16T09:45:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "90000000000000000000000A" },
+    "cottageId": { "$oid": "70000000000000000000000D" },
+    "touristId": { "$oid": "60000000000000000000000D" },
+    "rating": 5,
+    "comment": "Wine lover's paradise! The vineyard tours and wine tasting were exceptional. Villa is luxurious and comfortable.",
+    "createdAt": { "$date": "2024-09-11T16:30:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "90000000000000000000000B" },
+    "cottageId": { "$oid": "700000000000000000000004" },
+    "touristId": { "$oid": "600000000000000000000008" },
+    "rating": 5,
+    "comment": "Eco lodge was perfect! Loved the sustainable approach and the organic garden. Great for nature enthusiasts.",
+    "createdAt": { "$date": "2024-11-11T10:15:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "90000000000000000000000C" },
+    "cottageId": { "$oid": "700000000000000000000005" },
+    "touristId": { "$oid": "600000000000000000000002" },
+    "rating": 4,
+    "comment": "Wine cottage was charming. The wine cellar tour was educational and fun. Kids enjoyed the garden too.",
+    "createdAt": { "$date": "2024-10-21T14:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "90000000000000000000000D" },
+    "cottageId": { "$oid": "700000000000000000000002" },
+    "touristId": { "$oid": "60000000000000000000000A" },
+    "rating": 5,
+    "comment": "Best ski lodge we've stayed in! The sauna and hot tub were perfect after a day on the slopes.",
+    "createdAt": { "$date": "2025-02-03T12:30:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "90000000000000000000000E" },
+    "cottageId": { "$oid": "700000000000000000000001" },
+    "touristId": { "$oid": "600000000000000000000007" },
+    "rating": 4,
+    "comment": "Beautiful mountain retreat. The location is great for both summer and winter activities. Very comfortable.",
+    "createdAt": { "$date": "2024-12-21T09:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "90000000000000000000000F" },
+    "cottageId": { "$oid": "700000000000000000000006" },
+    "touristId": { "$oid": "600000000000000000000003" },
+    "rating": 5,
+    "comment": "Perfect digital detox spot! No distractions, just beautiful nature. The forest trails are wonderful.",
+    "createdAt": { "$date": "2025-03-19T11:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "900000000000000000000010" },
+    "cottageId": { "$oid": "70000000000000000000000A" },
+    "touristId": { "$oid": "600000000000000000000007" },
+    "rating": 5,
+    "comment": "Family lodge was perfect for our kids! The playground kept them entertained and the location near ski lifts was convenient.",
+    "createdAt": { "$date": "2025-02-21T10:30:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "900000000000000000000011" },
+    "cottageId": { "$oid": "70000000000000000000000E" },
+    "touristId": { "$oid": "60000000000000000000000E" },
+    "rating": 5,
+    "comment": "Most romantic getaway ever! The hot tub under the stars was magical. Perfect for couples.",
+    "createdAt": { "$date": "2025-04-17T16:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "900000000000000000000012" },
+    "cottageId": { "$oid": "70000000000000000000000B" },
+    "touristId": { "$oid": "600000000000000000000009" },
+    "rating": 4,
+    "comment": "Great base for adventure! Went rafting on Tara River - incredible experience. Cottage was comfortable.",
+    "createdAt": { "$date": "2025-05-16T14:20:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "900000000000000000000013" },
+    "cottageId": { "$oid": "700000000000000000000003" },
+    "touristId": { "$oid": "600000000000000000000009" },
+    "rating": 2,
+    "comment": "Location was nice but cottage needs maintenance. Some appliances didn't work properly.",
+    "createdAt": { "$date": "2024-11-14T10:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "900000000000000000000014" },
+    "cottageId": { "$oid": "700000000000000000000003" },
+    "touristId": { "$oid": "600000000000000000000007" },
+    "rating": 1,
+    "comment": "Very disappointing! The heating didn't work properly in winter, plumbing issues, and the place was not clean. NOT worth the price.",
+    "createdAt": { "$date": "2024-12-26T08:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "900000000000000000000015" },
+    "cottageId": { "$oid": "700000000000000000000003" },
+    "touristId": { "$oid": "600000000000000000000008" },
+    "rating": 1,
+    "comment": "Terrible experience. Water was running cold, WiFi didn't work, and there were cleanliness issues. The owner was unresponsive to our complaints. Would NOT recommend!",
+    "createdAt": { "$date": "2025-01-09T11:30:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "900000000000000000000016" },
+    "cottageId": { "$oid": "700000000000000000000003" },
+    "touristId": { "$oid": "600000000000000000000002" },
+    "rating": 1,
+    "comment": "WORST cottage experience ever! The cabin was in terrible condition - broken furniture, dirty, plumbing problems, and the amenities listed were not available. Owner did nothing to fix the issues. Complete waste of money!",
+    "createdAt": { "$date": "2025-02-05T09:20:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "900000000000000000000017" },
+    "cottageId": { "$oid": "700000000000000000000009" },
+    "touristId": { "$oid": "600000000000000000000002" },
+    "rating": 5,
+    "comment": "Incredible ski chalet! Our family had the best time. The game room kept the kids happy when they weren't skiing.",
+    "createdAt": { "$date": "2025-03-08T15:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "900000000000000000000018" },
+    "cottageId": { "$oid": "70000000000000000000000F" },
+    "touristId": { "$oid": "600000000000000000000003" },
+    "rating": 4,
+    "comment": "Lake house was beautiful! Loved the kayaks and private beach access. Great for summer vacation.",
+    "createdAt": { "$date": "2025-08-18T12:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "900000000000000000000019" },
+    "cottageId": { "$oid": "700000000000000000000007" },
+    "touristId": { "$oid": "60000000000000000000000D" },
+    "rating": 4,
+    "comment": "Traditional cottage with authentic Serbian hospitality. The fireplace and garden were lovely.",
+    "createdAt": { "$date": "2024-11-19T10:30:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "90000000000000000000001A" },
+    "cottageId": { "$oid": "700000000000000000000008" },
+    "touristId": { "$oid": "60000000000000000000000E" },
+    "rating": 5,
+    "comment": "Spa cottage was rejuvenating! The wellness programs and thermal springs were exactly what we needed.",
+    "createdAt": { "$date": "2024-10-26T16:45:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "90000000000000000000001B" },
+    "cottageId": { "$oid": "700000000000000000000005" },
+    "touristId": { "$oid": "600000000000000000000003" },
+    "rating": 5,
+    "comment": "Wine cottage exceeded all expectations! The vineyard tours were educational and the wine tasting was fantastic.",
+    "createdAt": { "$date": "2025-09-06T14:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "90000000000000000000001C" },
+    "cottageId": { "$oid": "70000000000000000000000C" },
+    "touristId": { "$oid": "60000000000000000000000A" },
+    "rating": 5,
+    "comment": "Winter cabin was cozy and comfortable. Perfect for a ski trip with friends!",
+    "createdAt": { "$date": "2024-12-16T11:20:00.000Z" }
+  }
+]

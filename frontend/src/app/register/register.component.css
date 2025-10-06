@@ -1,0 +1,177 @@
+.register-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+button:hover:not(:disabled) {
+  background-color: #0b7dda;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #d32f2f;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #ffebee;
+  border-radius: 3px;
+  border-left: 4px solid #d32f2f;
+}
+
+.error-message strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 1.05em;
+}
+
+.error-message ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.error-message li {
+  margin-bottom: 5px;
+  line-height: 1.5;
+}
+
+.success-message {
+  color: green;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #e8f5e9;
+  border-radius: 3px;
+}
+
+.login-link {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.login-link a {
+  color: #2196f3;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+.file-upload-group {
+  grid-column: 1 / -1;
+}
+
+.file-hint {
+  font-size: 0.85em;
+  color: #666;
+  margin-top: 5px;
+}
+
+.image-preview {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.image-preview img {
+  max-width: 200px;
+  max-height: 200px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+}
+
+.image-preview p {
+  margin-top: 5px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.field-hint {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.85em;
+  color: #666;
+  font-style: italic;
+}
+
+.credit-card-input-wrapper {
+  position: relative;
+}
+
+.credit-card-input-wrapper input {
+  padding-right: 70px;
+}
+
+.card-icon {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  height: 100%;
+  max-height: 32px;
+}
+
+.card-logo {
+  height: 28px;
+  width: auto;
+  max-width: 50px;
+  object-fit: contain;
+  display: block;
+}
+
+.password-validation-errors {
+  margin-top: 8px;
+  padding: 8px;
+  background-color: #ffebee;
+  border-left: 3px solid #d32f2f;
+  border-radius: 3px;
+}
+
+.validation-error {
+  color: #d32f2f;
+  font-size: 0.85em;
+  margin: 3px 0;
+  font-weight: 500;
+}

@@ -1,0 +1,56 @@
+<div class="statistics-container">
+  <h2>Statistics</h2>
+
+  <div *ngIf="loading" class="loading">
+    <p>Loading statistics...</p>
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    <p>{{ error }}</p>
+  </div>
+
+  <div *ngIf="!loading && !error">
+    <div class="filter-section">
+      <label for="cottageFilter">Filter by Cottage:</label>
+      <select
+        id="cottageFilter"
+        [(ngModel)]="selectedCottage"
+        (change)="onCottageChange()"
+        class="cottage-select"
+      >
+        <option value="all">All Cottages</option>
+        <option *ngFor="let cottage of cottageNames" [value]="cottage.id">
+          {{ cottage.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="charts-container">
+      <div class="chart-wrapper">
+        <canvas
+          #barChartCanvas
+          width="800"
+          height="500"
+          class="chart-canvas"
+        ></canvas>
+      </div>
+
+      <div class="chart-wrapper">
+        <canvas
+          #pieChartCanvas
+          width="600"
+          height="500"
+          class="chart-canvas"
+        ></canvas>
+      </div>
+    </div>
+
+    <div *ngIf="reservationsPerMonth.length === 0" class="no-data">
+      <p>No cottages or reservation data available yet.</p>
+      <p>
+        Statistics will appear once you have completed reservations for your
+        cottages.
+      </p>
+    </div>
+  </div>
+</div>

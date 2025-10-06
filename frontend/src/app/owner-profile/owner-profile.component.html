@@ -1,0 +1,155 @@
+<div class="profile-container">
+  <h2>My Profile</h2>
+
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+  <!-- View Mode -->
+  <div *ngIf="!isEditMode && currentUser" class="profile-view">
+    <div class="profile-card">
+      <div class="profile-picture-section">
+        <img
+          [src]="getProfilePictureUrl()"
+          alt="Profile Picture"
+          class="profile-picture"
+        />
+      </div>
+
+      <div class="profile-info">
+        <div class="info-row">
+          <label>First Name:</label>
+          <span>{{ currentUser.firstName }}</span>
+        </div>
+
+        <div class="info-row">
+          <label>Last Name:</label>
+          <span>{{ currentUser.lastName }}</span>
+        </div>
+
+        <div class="info-row">
+          <label>Email:</label>
+          <span>{{ currentUser.email }}</span>
+        </div>
+
+        <div class="info-row">
+          <label>Address:</label>
+          <span>{{ currentUser.address }}</span>
+        </div>
+
+        <div class="info-row">
+          <label>Phone:</label>
+          <span>{{ currentUser.phone }}</span>
+        </div>
+
+        <div class="info-row">
+          <label>Credit Card:</label>
+          <span>{{ currentUser.creditCard || "Not provided" }}</span>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button (click)="toggleEditMode()" class="btn-primary">
+          Edit Profile
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Mode -->
+  <div *ngIf="isEditMode" class="profile-edit">
+    <div class="profile-card">
+      <div class="profile-picture-section">
+        <img
+          [src]="previewUrl ? previewUrl : getProfilePictureUrl()"
+          alt="Profile Picture"
+          class="profile-picture"
+        />
+        <div class="file-upload-section">
+          <label for="profilePicture" class="file-label">
+            Change Profile Picture
+          </label>
+          <input
+            type="file"
+            id="profilePicture"
+            (change)="onFileSelected($event)"
+            accept="image/jpeg,image/jpg,image/png"
+            class="file-input"
+          />
+          <p class="file-hint">JPG/PNG, 100x100 to 300x300 pixels</p>
+        </div>
+      </div>
+
+      <div class="profile-form">
+        <div class="form-group">
+          <label for="firstName">First Name:</label>
+          <input
+            type="text"
+            id="firstName"
+            [(ngModel)]="editData.firstName"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last Name:</label>
+          <input
+            type="text"
+            id="lastName"
+            [(ngModel)]="editData.lastName"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            [(ngModel)]="editData.email"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="address">Address:</label>
+          <input
+            type="text"
+            id="address"
+            [(ngModel)]="editData.address"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone:</label>
+          <input
+            type="text"
+            id="phone"
+            [(ngModel)]="editData.phone"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="creditCard">Credit Card:</label>
+          <input
+            type="text"
+            id="creditCard"
+            [(ngModel)]="editData.creditCard"
+            class="form-control"
+          />
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button (click)="toggleEditMode()" class="btn-secondary">Cancel</button>
+        <button (click)="saveProfile()" class="btn-primary">
+          Save Changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="owner-dashboard">
+  <header>
+    <h2>Cottage Owner Dashboard</h2>
+    <div class="header-right">
+      <span *ngIf="currentUser" class="user-name">
+        {{ currentUser.firstName }} {{ currentUser.lastName }}
+      </span>
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </header>
+
+  <nav class="main-menu">
+    <button
+      (click)="navigateTo('profile')"
+      [class.active]="activeSection === 'profile'"
+      class="menu-item"
+    >
+      Profile
+    </button>
+    <button
+      (click)="navigateTo('cottages')"
+      [class.active]="activeSection === 'cottages'"
+      class="menu-item"
+    >
+      My Cottages
+    </button>
+    <button
+      (click)="navigateTo('reservations')"
+      [class.active]="activeSection === 'reservations'"
+      class="menu-item"
+    >
+      Reservations
+    </button>
+    <button
+      (click)="navigateTo('statistics')"
+      [class.active]="activeSection === 'statistics'"
+      class="menu-item"
+    >
+      Statistics
+    </button>
+  </nav>
+
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

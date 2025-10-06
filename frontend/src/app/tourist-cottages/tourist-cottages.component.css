@@ -1,0 +1,158 @@
+.cottages-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.search-box {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.search-btn {
+  padding: 10px 30px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.search-btn:hover {
+  background-color: #45a049;
+}
+
+.cottages-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.cottages-table thead {
+  background-color: #4caf50;
+  color: white;
+}
+
+.cottages-table th,
+.cottages-table td {
+  padding: 15px;
+  text-align: left;
+}
+
+.cottages-table th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.cottages-table th.sortable:hover {
+  background-color: #45a049;
+}
+
+.cottages-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.cottages-table tbody tr:hover {
+  background-color: #f0f0f0;
+}
+
+.cottage-link {
+  color: #2196f3;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cottage-link:hover {
+  text-decoration: underline;
+}
+
+.rating-cell {
+  min-width: 180px;
+}
+
+.rating-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.star {
+  font-size: 20px;
+  color: #ddd;
+}
+
+.star.full {
+  color: #ffd700;
+}
+
+.star.half {
+  color: #ffd700;
+  position: relative;
+}
+
+.star.empty {
+  color: #ddd;
+}
+
+.rating-number {
+  font-weight: bold;
+  color: #333;
+  font-size: 1.1em;
+}
+
+.rating-count {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.2em;
+  color: #666;
+}
+
+.no-data {
+  text-align: center;
+  padding: 40px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  color: #999;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #ffebee;
+  border-radius: 5px;
+  text-align: center;
+}

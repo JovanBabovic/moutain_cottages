@@ -1,0 +1,186 @@
+<div class="profile-container">
+  <h2>My Profile</h2>
+
+  <div class="success-message" *ngIf="successMessage">
+    {{ successMessage }}
+  </div>
+
+  <div class="error-message" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+
+  <div class="profile-content" *ngIf="currentUser">
+    <!-- View Mode -->
+    <div *ngIf="!isEditing" class="view-mode">
+      <div class="profile-picture-section">
+        <img
+          [src]="getProfilePictureUrl()"
+          alt="Profile Picture"
+          class="profile-pic"
+        />
+      </div>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <label>First Name:</label>
+          <span>{{ currentUser.firstName }}</span>
+        </div>
+        <div class="info-item">
+          <label>Last Name:</label>
+          <span>{{ currentUser.lastName }}</span>
+        </div>
+        <div class="info-item">
+          <label>Email:</label>
+          <span>{{ currentUser.email }}</span>
+        </div>
+        <div class="info-item">
+          <label>Phone:</label>
+          <span>{{ currentUser.phone }}</span>
+        </div>
+        <div class="info-item">
+          <label>Address:</label>
+          <span>{{ currentUser.address }}</span>
+        </div>
+        <div class="info-item">
+          <label>Gender:</label>
+          <span>{{ currentUser.gender === "M" ? "Male" : "Female" }}</span>
+        </div>
+        <div class="info-item">
+          <label>Credit Card:</label>
+          <span>{{ currentUser.creditCard || "N/A" }}</span>
+        </div>
+      </div>
+
+      <button class="edit-btn" (click)="toggleEdit()">Edit Profile</button>
+    </div>
+
+    <!-- Edit Mode -->
+    <div *ngIf="isEditing" class="edit-mode">
+      <form (ngSubmit)="onSubmit()" #profileForm="ngForm">
+        <div class="profile-picture-section">
+          <img
+            [src]="previewUrl || getProfilePictureUrl()"
+            alt="Profile Picture"
+            class="profile-pic"
+          />
+          <div class="file-upload">
+            <input
+              type="file"
+              id="profilePicture"
+              (change)="onFileSelected($event)"
+              accept="image/jpeg,image/jpg,image/png"
+            />
+            <label for="profilePicture" class="upload-label"
+              >Change Picture</label
+            >
+            <p class="upload-hint">JPG/PNG, 100x100 to 300x300 pixels</p>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="firstName">First Name: *</label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              [(ngModel)]="editData.firstName"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">Last Name: *</label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              [(ngModel)]="editData.lastName"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email: *</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              [(ngModel)]="editData.email"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone: *</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              [(ngModel)]="editData.phone"
+              required
+            />
+          </div>
+
+          <div class="form-group full-width">
+            <label for="address">Address: *</label>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              [(ngModel)]="editData.address"
+              required
+            />
+          </div>
+
+          <div class="form-group full-width">
+            <label for="creditCard">Credit Card:</label>
+            <div class="credit-card-input-wrapper">
+              <input
+                type="text"
+                id="creditCard"
+                name="creditCard"
+                [(ngModel)]="editData.creditCard"
+                (input)="onCreditCardInput()"
+                placeholder="1234567890123456"
+              />
+              <span class="card-icon" *ngIf="cardType">
+                <img
+                  *ngIf="cardType === 'visa'"
+                  src="/assets/card-logos/visa.png"
+                  alt="Visa"
+                  class="card-logo"
+                />
+                <img
+                  *ngIf="cardType === 'mastercard'"
+                  src="/assets/card-logos/mastercard.png"
+                  alt="MasterCard"
+                  class="card-logo"
+                />
+                <img
+                  *ngIf="cardType === 'diners'"
+                  src="/assets/card-logos/diners.png"
+                  alt="Diners"
+                  class="card-logo"
+                />
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button
+            type="submit"
+            class="save-btn"
+            [disabled]="isLoading || !profileForm.form.valid"
+          >
+            {{ isLoading ? "Saving..." : "Save Changes" }}
+          </button>
+          <button type="button" class="cancel-btn" (click)="toggleEdit()">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

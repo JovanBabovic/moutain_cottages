@@ -1,0 +1,296 @@
+<div class="owner-cottages">
+  <div class="header">
+    <h2>My Cottages</h2>
+    <div class="header-actions">
+      <button class="btn btn-secondary" (click)="openJsonModal()">
+        Import from JSON
+      </button>
+      <button class="btn btn-primary" (click)="openAddModal()">
+        Add New Cottage
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-error">{{ errorMessage }}</div>
+  <div *ngIf="isLoading" class="loading">Loading cottages...</div>
+
+  <div *ngIf="!isLoading" class="cottages-list">
+    <div *ngIf="cottages.length === 0" class="no-cottages">
+      <p>You haven't added any cottages yet.</p>
+      <button class="btn btn-primary" (click)="openAddModal()">
+        Add Your First Cottage
+      </button>
+    </div>
+
+    <div class="cottage-card" *ngFor="let cottage of cottages">
+      <div class="cottage-images">
+        <img
+          *ngIf="cottage.images && cottage.images.length > 0"
+          [src]="getImageUrl(cottage.images[0])"
+          [alt]="cottage.name"
+          class="cottage-image"
+        />
+        <div
+          *ngIf="!cottage.images || cottage.images.length === 0"
+          class="no-image"
+        >
+          No Image
+        </div>
+        <span
+          *ngIf="cottage.images && cottage.images.length > 1"
+          class="image-count"
+          >+{{ cottage.images.length - 1 }} more</span
+        >
+      </div>
+
+      <div class="cottage-info">
+        <h3>{{ cottage.name }}</h3>
+        <p class="location">📍 {{ cottage.location }}</p>
+        <p class="description">{{ cottage.description }}</p>
+        <div class="cottage-details">
+          <span class="price"
+            >Summer: ${{ cottage.summerPrice }}/night | Winter: ${{
+              cottage.winterPrice
+            }}/night</span
+          >
+          <span class="capacity">👥 Up to {{ cottage.capacity }} guests</span>
+        </div>
+        <div
+          *ngIf="cottage.amenities && cottage.amenities.length > 0"
+          class="amenities"
+        >
+          <span *ngFor="let amenity of cottage.amenities" class="amenity-tag">{{
+            amenity
+          }}</span>
+        </div>
+      </div>
+
+      <div class="cottage-actions">
+        <button class="btn btn-edit" (click)="openEditModal(cottage)">
+          Edit
+        </button>
+        <button class="btn btn-delete" (click)="openDeleteModal(cottage)">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add/Edit Modal Template (simplified for brevity) -->
+  <div
+    *ngIf="showAddModal || showEditModal"
+    class="modal-overlay"
+    (click)="closeModals()"
+  >
+    <div class="modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>{{ showAddModal ? "Add New Cottage" : "Edit Cottage" }}</h3>
+        <button class="close-btn" (click)="closeModals()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label>Cottage Name *</label
+            ><input
+              type="text"
+              [(ngModel)]="cottageForm.name"
+              name="name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Location *</label
+            ><input
+              type="text"
+              [(ngModel)]="cottageForm.location"
+              name="location"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Description</label
+            ><textarea
+              [(ngModel)]="cottageForm.description"
+              name="description"
+              rows="3"
+            ></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Summer Price ($/night) * <small>(May-August)</small></label
+              ><input
+                type="number"
+                [(ngModel)]="cottageForm.summerPrice"
+                name="summerPrice"
+                min="0"
+                step="0.01"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label>Winter Price ($/night) * <small>(Sept-April)</small></label
+              ><input
+                type="number"
+                [(ngModel)]="cottageForm.winterPrice"
+                name="winterPrice"
+                min="0"
+                step="0.01"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Capacity (guests) *</label
+              ><input
+                type="number"
+                [(ngModel)]="cottageForm.capacity"
+                name="capacity"
+                min="1"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Contact Phone</label
+            ><input type="tel" [(ngModel)]="cottageForm.phone" name="phone" />
+          </div>
+          <div class="form-group">
+            <label>Services/Amenities (comma-separated)</label
+            ><input
+              type="text"
+              [(ngModel)]="cottageForm.amenities"
+              name="amenities"
+              placeholder="WiFi, Parking, Kitchen"
+            />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Latitude</label
+              ><input
+                type="number"
+                [(ngModel)]="cottageForm.latitude"
+                name="latitude"
+                step="any"
+              />
+            </div>
+            <div class="form-group">
+              <label>Longitude</label
+              ><input
+                type="number"
+                [(ngModel)]="cottageForm.longitude"
+                name="longitude"
+                step="any"
+              />
+            </div>
+          </div>
+          <div *ngIf="showEditModal" class="form-group">
+            <label>Existing Images</label>
+            <div class="existing-images">
+              <div *ngFor="let image of existingImages" class="image-preview">
+                <img [src]="getImageUrl(image)" alt="Cottage image" />
+                <button
+                  type="button"
+                  class="remove-img-btn"
+                  (click)="removeExistingImage(image)"
+                >
+                  &times;
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label
+              >{{ showEditModal ? "Add New Images" : "Cottage Images" }} (up to
+              10)</label
+            >
+            <input
+              type="file"
+              (change)="onFileSelected($event)"
+              accept="image/jpeg,image/jpg,image/png"
+              multiple
+            />
+            <small>Selected: {{ selectedImages.length }} image(s)</small>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeModals()">
+          Cancel
+        </button>
+        <button
+          class="btn btn-primary"
+          (click)="showAddModal ? submitAdd() : submitEdit()"
+        >
+          {{ showAddModal ? "Create Cottage" : "Update Cottage" }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Modal -->
+  <div *ngIf="showDeleteModal" class="modal-overlay" (click)="closeModals()">
+    <div class="modal modal-small" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>Delete Cottage</h3>
+        <button class="close-btn" (click)="closeModals()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Are you sure you want to delete "<strong>{{
+            selectedCottage?.name
+          }}</strong
+          >"?
+        </p>
+        <p class="warning">
+          This action cannot be undone. You cannot delete a cottage with active
+          reservations.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeModals()">
+          Cancel
+        </button>
+        <button class="btn btn-danger" (click)="submitDelete()">
+          Delete Cottage
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JSON Import Modal -->
+  <div *ngIf="showJsonModal" class="modal-overlay" (click)="closeModals()">
+    <div class="modal modal-small" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>Import Cottage from JSON</h3>
+        <button class="close-btn" (click)="closeModals()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Upload a JSON file with cottage information. Images must be uploaded
+          separately by editing the cottage after import.
+        </p>
+        <div class="form-group">
+          <label>JSON File</label
+          ><input
+            type="file"
+            (change)="onJsonFileSelected($event)"
+            accept="application/json"
+          />
+        </div>
+        <small *ngIf="jsonFile">Selected: {{ jsonFile.name }}</small>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeModals()">
+          Cancel
+        </button>
+        <button class="btn btn-primary" (click)="submitJsonImport()">
+          Import
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

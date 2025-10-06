@@ -1,0 +1,167 @@
+<div class="reservations-container">
+  <h2>Cottage Reservations</h2>
+
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+  <div *ngIf="isLoading" class="loading">Loading reservations...</div>
+
+  <div *ngIf="!isLoading">
+    <!-- View Switcher -->
+    <div class="view-switcher">
+      <button
+        (click)="switchView('table')"
+        [class.active]="viewMode === 'table'"
+        class="view-btn"
+      >
+        📋 Table View
+      </button>
+      <button
+        (click)="switchView('calendar')"
+        [class.active]="viewMode === 'calendar'"
+        class="view-btn"
+      >
+        📅 Calendar View
+      </button>
+    </div>
+
+    <!-- Table View -->
+    <div *ngIf="viewMode === 'table'">
+      <section class="reservations-section">
+        <h3>Pending Reservations</h3>
+
+        <div *ngIf="pendingReservations.length === 0" class="no-data">
+          No pending reservations.
+        </div>
+
+        <table
+          *ngIf="pendingReservations.length > 0"
+          class="reservations-table"
+        >
+          <thead>
+            <tr>
+              <th>Check-in</th>
+              <th>Check-out</th>
+              <th>Cottage</th>
+              <th>Guest</th>
+              <th>Contact</th>
+              <th>Guests</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let reservation of pendingReservations">
+              <td>{{ formatDate(reservation.checkIn) }}</td>
+              <td>{{ formatDate(reservation.checkOut) }}</td>
+              <td>{{ getCottageName(reservation) }}</td>
+              <td>
+                {{ getTouristFirstName(reservation) }}
+                {{ getTouristLastName(reservation) }}
+              </td>
+              <td>
+                {{ getTouristEmail(reservation) }}<br />
+                {{ getTouristPhone(reservation) }}
+              </td>
+              <td>
+                Adults: {{ reservation.adults || 0 }}<br />
+                Children: {{ reservation.children || 0 }}
+              </td>
+              <td>
+                <div class="action-buttons">
+                  <button
+                    (click)="confirmReservation(reservation)"
+                    class="btn-confirm"
+                  >
+                    ✓ Confirm
+                  </button>
+                  <button
+                    (click)="openRejectModal(reservation)"
+                    class="btn-reject"
+                  >
+                    ✗ Reject
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+
+    <!-- Calendar View -->
+    <div *ngIf="viewMode === 'calendar'" class="calendar-container">
+      <div class="calendar-legend">
+        <div class="legend-item">
+          <span class="legend-color pending"></span>
+          <span>Pending</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color confirmed"></span>
+          <span>Confirmed</span>
+        </div>
+      </div>
+
+      <full-calendar [options]="calendarOptions()"></full-calendar>
+    </div>
+  </div>
+
+  <!-- Rejection Modal -->
+  <div
+    *ngIf="showRejectModal"
+    class="modal-overlay"
+    (click)="closeRejectModal()"
+  >
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>Reject Reservation</h3>
+        <button class="close-btn" (click)="closeRejectModal()">×</button>
+      </div>
+
+      <div class="modal-body">
+        <div *ngIf="selectedReservation" class="reservation-info">
+          <p>
+            <strong>Cottage:</strong> {{ getCottageName(selectedReservation) }}
+          </p>
+          <p>
+            <strong>Guest:</strong>
+            {{ getTouristFirstName(selectedReservation) }}
+            {{ getTouristLastName(selectedReservation) }}
+          </p>
+          <p>
+            <strong>Check-in:</strong>
+            {{ formatDate(selectedReservation.checkIn) }}
+          </p>
+          <p>
+            <strong>Check-out:</strong>
+            {{ formatDate(selectedReservation.checkOut) }}
+          </p>
+        </div>
+
+        <div class="form-group">
+          <label for="rejectionReason">
+            Reason for Rejection: <span class="required">*</span>
+          </label>
+          <textarea
+            id="rejectionReason"
+            [(ngModel)]="rejectionReason"
+            rows="6"
+            placeholder="Please provide a clear reason for rejecting this reservation..."
+            class="form-control"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button (click)="closeRejectModal()" class="btn-secondary">
+          Cancel
+        </button>
+        <button (click)="submitRejection()" class="btn-danger">
+          Reject Reservation
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,185 @@
+<div class="reservations-container">
+  <h2>My Reservations</h2>
+
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+  <div *ngIf="isLoading" class="loading">Loading reservations...</div>
+
+  <div *ngIf="!isLoading">
+    <!-- Current Reservations -->
+    <section class="reservations-section">
+      <h3>Current Reservations</h3>
+
+      <div *ngIf="currentReservations.length === 0" class="no-data">
+        You have no current reservations.
+      </div>
+
+      <table *ngIf="currentReservations.length > 0" class="reservations-table">
+        <thead>
+          <tr>
+            <th>Check-in Date</th>
+            <th>Check-out Date</th>
+            <th>Cottage Name</th>
+            <th>Location</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let reservation of currentReservations">
+            <td>{{ formatDate(reservation.checkIn) }}</td>
+            <td>{{ formatDate(reservation.checkOut) }}</td>
+            <td>{{ getCottageName(reservation) }}</td>
+            <td>{{ getCottageLocation(reservation) }}</td>
+            <td>
+              <span
+                class="status-badge"
+                [class.confirmed]="reservation.status === 'confirmed'"
+                [class.pending]="reservation.status === 'pending'"
+                [class.cancelled]="reservation.status === 'cancelled'"
+              >
+                {{ reservation.status }}
+              </span>
+              <div
+                *ngIf="reservation.status === 'cancelled' && reservation.note"
+                class="rejection-note"
+              >
+                <strong>Reason:</strong> {{ reservation.note }}
+              </div>
+            </td>
+            <td>
+              <button
+                *ngIf="canCancelReservation(reservation)"
+                (click)="cancelReservation(reservation)"
+                class="btn-cancel"
+              >
+                Cancel
+              </button>
+              <span
+                *ngIf="!canCancelReservation(reservation)"
+                class="no-action"
+              >
+                Cannot cancel
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Past Reservations (Archive) -->
+    <section class="reservations-section">
+      <h3>Past Reservations (Archive)</h3>
+
+      <div *ngIf="pastReservations.length === 0" class="no-data">
+        You have no past reservations.
+      </div>
+
+      <table *ngIf="pastReservations.length > 0" class="reservations-table">
+        <thead>
+          <tr>
+            <th>Stay Date</th>
+            <th>Cottage Name</th>
+            <th>Location</th>
+            <th>Your Rating</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let reservation of pastReservations">
+            <td>{{ formatDate(reservation.checkIn) }}</td>
+            <td>{{ getCottageName(reservation) }}</td>
+            <td>{{ getCottageLocation(reservation) }}</td>
+            <td>
+              <span *ngIf="hasRating(reservation)" class="has-rating">
+                ✓ Rated
+              </span>
+              <span *ngIf="!hasRating(reservation)" class="no-rating">
+                Not rated
+              </span>
+            </td>
+            <td>
+              <button
+                *ngIf="!hasRating(reservation)"
+                (click)="openRatingModal(reservation)"
+                class="btn-rate"
+              >
+                Rate & Comment
+              </button>
+              <span *ngIf="hasRating(reservation)" class="already-rated">
+                Already rated
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <!-- Rating Modal -->
+  <div
+    *ngIf="showRatingModal"
+    class="modal-overlay"
+    (click)="closeRatingModal()"
+  >
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>Rate Your Stay</h3>
+        <button class="close-btn" (click)="closeRatingModal()">×</button>
+      </div>
+
+      <div class="modal-body">
+        <div *ngIf="selectedReservation" class="reservation-info">
+          <p>
+            <strong>Cottage:</strong> {{ getCottageName(selectedReservation) }}
+          </p>
+          <p>
+            <strong>Stay Date:</strong>
+            {{ formatDate(selectedReservation.checkIn) }}
+          </p>
+        </div>
+
+        <div class="rating-input">
+          <label>Your Rating:</label>
+          <div class="star-rating">
+            <span
+              *ngFor="let star of [1, 2, 3, 4, 5]"
+              class="star"
+              [class.filled]="star <= (hoverRating || ratingValue)"
+              (click)="setRating(star)"
+              (mouseenter)="setHoverRating(star)"
+              (mouseleave)="setHoverRating(0)"
+            >
+              ★
+            </span>
+          </div>
+          <p class="rating-label">{{ ratingValue || 0 }} / 5</p>
+        </div>
+
+        <div class="comment-input">
+          <label for="comment">Your Comment:</label>
+          <textarea
+            id="comment"
+            [(ngModel)]="ratingComment"
+            rows="6"
+            placeholder="Share your experience at this cottage..."
+            class="form-control"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button (click)="closeRatingModal()" class="btn-secondary">
+          Cancel
+        </button>
+        <button (click)="submitRating()" class="btn-primary">
+          Submit Rating
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

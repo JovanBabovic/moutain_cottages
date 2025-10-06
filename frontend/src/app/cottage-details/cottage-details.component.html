@@ -1,0 +1,291 @@
+<div class="details-container" *ngIf="!isLoading && cottage">
+  <button (click)="goBack()" class="back-btn">← Back to Cottages</button>
+
+  <h1>{{ cottage.name }}</h1>
+  <h3>{{ cottage.location }}</h3>
+
+  <div class="details-grid">
+    <!-- Left Column: Main Info -->
+    <div class="main-info">
+      <!-- Image Gallery Placeholder -->
+      <div class="image-gallery">
+        <div class="main-image">
+          <p class="image-placeholder">
+            📷 Image Gallery ({{
+              cottage.images && cottage.images.length > 0
+                ? cottage.images.length + " images"
+                : "No images available"
+            }})
+          </p>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="section">
+        <h3>Description</h3>
+        <p>{{ cottage.description || "No description available" }}</p>
+      </div>
+
+      <!-- Services/Amenities -->
+      <div class="section">
+        <h3>Amenities & Services</h3>
+        <ul
+          class="amenities-list"
+          *ngIf="cottage.amenities && cottage.amenities.length > 0"
+        >
+          <li *ngFor="let amenity of cottage.amenities">✓ {{ amenity }}</li>
+        </ul>
+        <p *ngIf="!cottage.amenities || cottage.amenities.length === 0">
+          No amenities listed
+        </p>
+      </div>
+
+      <!-- Price & Contact -->
+      <div class="info-cards">
+        <div class="info-card">
+          <h4>Summer Price</h4>
+          <p class="price">{{ cottage.summerPrice | currency : "USD" }}</p>
+          <p class="price-label">per night (May-Aug)</p>
+        </div>
+
+        <div class="info-card">
+          <h4>Winter Price</h4>
+          <p class="price">{{ cottage.winterPrice | currency : "USD" }}</p>
+          <p class="price-label">per night (Sep-Apr)</p>
+        </div>
+
+        <div class="info-card">
+          <h4>Capacity</h4>
+          <p class="capacity">{{ cottage.capacity }} guests</p>
+        </div>
+
+        <div class="info-card">
+          <h4>Contact</h4>
+          <p class="contact">
+            {{ cottage.ownerId?.phone || "Phone not available" }}
+          </p>
+          <p class="contact-name">
+            {{ cottage.ownerId?.firstName }} {{ cottage.ownerId?.lastName }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Map -->
+      <div class="section">
+        <h3>Location Map</h3>
+        <div id="map" class="map-container"></div>
+      </div>
+
+      <!-- Comments & Ratings -->
+      <div class="section">
+        <h3>
+          Reviews & Ratings
+          <span class="rating-summary">
+            <span class="stars">
+              <span
+                *ngFor="let star of getStars(cottage.averageRating || 0)"
+                class="star"
+                [class.full]="star === 'full'"
+                [class.half]="star === 'half'"
+                [class.empty]="star === 'empty'"
+              >
+                ★
+              </span>
+            </span>
+            <span class="rating-number">
+              {{ cottage.averageRating || 0 | number : "1.1-1" }}
+            </span>
+            <span class="rating-count"
+              >({{ cottage.ratingCount || 0 }} reviews)</span
+            >
+          </span>
+        </h3>
+
+        <div
+          class="ratings-list"
+          *ngIf="cottage.ratings && cottage.ratings.length > 0"
+        >
+          <div *ngFor="let rating of cottage.ratings" class="rating-item">
+            <div class="rating-header">
+              <strong
+                >{{ rating.touristId?.firstName }}
+                {{ rating.touristId?.lastName }}</strong
+              >
+              <span class="rating-stars">
+                <span *ngFor="let i of [1, 2, 3, 4, 5]">
+                  <span *ngIf="i <= rating.rating" class="star full">★</span>
+                  <span *ngIf="i > rating.rating" class="star empty">★</span>
+                </span>
+              </span>
+            </div>
+            <p class="rating-comment">{{ rating.comment }}</p>
+            <p class="rating-date">
+              {{ rating.createdAt | date : "medium" }}
+            </p>
+          </div>
+        </div>
+
+        <p
+          *ngIf="!cottage.ratings || cottage.ratings.length === 0"
+          class="no-ratings"
+        >
+          No reviews yet. Be the first to review this cottage!
+        </p>
+      </div>
+    </div>
+
+    <!-- Right Column: Reservation -->
+    <div class="reservation-panel">
+      <div class="reservation-box">
+        <h3>Make a Reservation</h3>
+
+        <!-- Not Started -->
+        <div *ngIf="reservationStep === 0">
+          <p>Book your stay at this beautiful cottage!</p>
+          <button (click)="startReservation()" class="btn-primary">
+            Start Booking
+          </button>
+        </div>
+
+        <!-- Step 1: Date Selection -->
+        <div *ngIf="reservationStep === 1" class="reservation-step">
+          <h4>Step 1: Select Dates & Guests</h4>
+
+          <div class="form-group">
+            <label for="checkIn">Check-in Date:</label>
+            <input
+              type="date"
+              id="checkIn"
+              [(ngModel)]="checkInDate"
+              class="form-control"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="checkOut">Check-out Date:</label>
+            <input
+              type="date"
+              id="checkOut"
+              [(ngModel)]="checkOutDate"
+              class="form-control"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="adults">Adults:</label>
+            <input
+              type="number"
+              id="adults"
+              [(ngModel)]="adults"
+              min="1"
+              class="form-control"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="children">Children:</label>
+            <input
+              type="number"
+              id="children"
+              [(ngModel)]="children"
+              min="0"
+              class="form-control"
+            />
+          </div>
+
+          <div *ngIf="availabilityError" class="error-message">
+            {{ availabilityError }}
+          </div>
+
+          <div class="btn-group">
+            <button (click)="cancelReservation()" class="btn-secondary">
+              Cancel
+            </button>
+            <button
+              (click)="checkAvailability()"
+              class="btn-primary"
+              [disabled]="isCheckingAvailability"
+            >
+              {{
+                isCheckingAvailability ? "Checking..." : "Check Availability"
+              }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2: Payment -->
+        <div *ngIf="reservationStep === 2" class="reservation-step">
+          <h4>Step 2: Confirm & Pay</h4>
+
+          <div class="booking-summary">
+            <h5>Booking Summary</h5>
+            <p><strong>Cottage:</strong> {{ cottage.name }}</p>
+            <p>
+              <strong>Check-in:</strong> {{ checkInDate | date : "mediumDate" }}
+            </p>
+            <p>
+              <strong>Check-out:</strong>
+              {{ checkOutDate | date : "mediumDate" }}
+            </p>
+            <p><strong>Adults:</strong> {{ adults }}</p>
+            <p><strong>Children:</strong> {{ children }}</p>
+            <p><strong>Nights:</strong> {{ nights }}</p>
+            <p class="total-price">
+              <strong>Total Price:</strong>
+              {{ calculatedPrice | currency : "EUR" }}
+            </p>
+          </div>
+
+          <div *ngIf="availabilityMessage" class="success-message">
+            {{ availabilityMessage }}
+          </div>
+
+          <div class="form-group">
+            <label for="creditCard">Credit Card Number:</label>
+            <input
+              type="text"
+              id="creditCard"
+              [(ngModel)]="creditCard"
+              class="form-control"
+              placeholder="Enter card number"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="note">Additional Notes (optional):</label>
+            <textarea
+              id="note"
+              [(ngModel)]="note"
+              class="form-control"
+              rows="4"
+              maxlength="500"
+              placeholder="Any special requests or notes..."
+            ></textarea>
+            <small>{{ note.length }}/500 characters</small>
+          </div>
+
+          <div *ngIf="availabilityError" class="error-message">
+            {{ availabilityError }}
+          </div>
+
+          <div class="btn-group">
+            <button (click)="backToStep1()" class="btn-secondary">Back</button>
+            <button
+              (click)="confirmReservation()"
+              class="btn-primary"
+              [disabled]="isBooking"
+            >
+              {{ isBooking ? "Booking..." : "Confirm Reservation" }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isLoading" class="loading">Loading cottage details...</div>
+
+<div *ngIf="!isLoading && errorMessage" class="error-message">
+  {{ errorMessage }}
+</div>

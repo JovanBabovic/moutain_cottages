@@ -1,0 +1,19 @@
+{
+  "name": "Mountain View Cottage",
+  "location": "Zlatibor, Serbia",
+  "description": "Beautiful cottage with stunning mountain views. Perfect for families and nature lovers. Features modern amenities and cozy atmosphere.",
+  "summerPrice": 100,
+  "winterPrice": 85,
+  "capacity": 6,
+  "amenities": [
+    "WiFi",
+    "Fireplace",
+    "Parking",
+    "Kitchen",
+    "Heating",
+    "BBQ Grill"
+  ],
+  "phone": "+381641234567",
+  "latitude": 43.7397,
+  "longitude": 19.7136
+}
