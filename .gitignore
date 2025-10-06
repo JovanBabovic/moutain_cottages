@@ -1,0 +1,58 @@
+# --- GLOBAL IGNORES ---
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+*.log
+.DS_Store
+Thumbs.db
+
+# --- NODE / BACKEND ---
+node_modules/
+dist/
+build/
+tmp/
+.env
+.env.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- ANGULAR / FRONTEND ---
+# Ignore Angular build outputs
+frontend/dist/
+frontend/node_modules/
+frontend/.angular/cache/
+frontend/.angular/
+frontend/.env
+frontend/tmp/
+
+# --- IDE / OS FILES ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- TESTS / COVERAGE ---
+coverage/
+*.spec.ts
+
+# --- COMPILED FILES ---
+*.class
+*.exe
+*.dll
+*.war
+*.jar
+*.pyc
+*.pyo
+
+# --- DATABASE DUMPS (if large) ---
+*.sql
+*.sqlite
+*.db
+*.bson
+*.mongo
+dump/
+
+*.md
