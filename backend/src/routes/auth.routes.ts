@@ -20,7 +20,7 @@ import bcrypt from "bcrypt";
 
 const router = express.Router();
 
-const DEFAULT_PROFILE_PICTURE = "/uploads/default-profile.png";
+const DEFAULT_PROFILE_PICTURE = "/uploads/default/defaultphoto.jpg";
 
 // Login route for tourists and owners
 // @ts-ignore

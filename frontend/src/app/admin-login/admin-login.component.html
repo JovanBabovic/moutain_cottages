@@ -1,35 +1,64 @@
 <div class="admin-login-container">
-  <h2>Administrator Login</h2>
-
-  <form (ngSubmit)="onSubmit()" #adminLoginForm="ngForm">
-    <div class="form-group">
-      <label for="username">Admin Username:</label>
-      <input
-        type="text"
-        id="username"
-        name="username"
-        [(ngModel)]="username"
-        required
-      />
+  <div class="login-card">
+    <div class="admin-header">
+      <span class="admin-crown">👑</span>
+      <h2>Admin Portal</h2>
+      <p class="admin-subtitle">Secure Access Control</p>
     </div>
 
-    <div class="form-group">
-      <label for="password">Admin Password:</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        [(ngModel)]="password"
-        required
-      />
-    </div>
+    <form (ngSubmit)="onSubmit()" #adminLoginForm="ngForm">
+      <div class="form-group">
+        <label for="username">Administrator Username</label>
+        <div class="input-wrapper">
+          <span class="input-icon">👤</span>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            [(ngModel)]="username"
+            placeholder="Enter admin username"
+            required
+            autocomplete="username"
+          />
+        </div>
+      </div>
 
-    <div class="error-message" *ngIf="errorMessage">
-      {{ errorMessage }}
-    </div>
+      <div class="form-group">
+        <label for="password">Administrator Password</label>
+        <div class="input-wrapper">
+          <span class="input-icon">🔐</span>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            [(ngModel)]="password"
+            placeholder="Enter admin password"
+            required
+            autocomplete="current-password"
+          />
+        </div>
+      </div>
 
-    <button type="submit" [disabled]="isLoading || !adminLoginForm.form.valid">
-      {{ isLoading ? "Logging in..." : "Admin Login" }}
-    </button>
-  </form>
+      <div class="error-message" *ngIf="errorMessage">
+        <span class="security-icon">⚠️</span>
+        {{ errorMessage }}
+      </div>
+
+      <button
+        type="submit"
+        class="login-button"
+        [disabled]="isLoading || !adminLoginForm.form.valid"
+      >
+        <span *ngIf="isLoading" class="loading-spinner"></span>
+        <span class="button-icon" *ngIf="!isLoading">🚀</span>
+        {{ isLoading ? "Authenticating..." : "Access Admin Panel" }}
+      </button>
+    </form>
+
+    <div class="security-notice">
+      <span class="security-icon">🛡️</span>
+      This is a secure administrative area. All access attempts are logged and
+      monitored.
+    </div>
+  </div>
 </div>

@@ -1,84 +1,88 @@
-<div class="cottages-container">
-  <h2>Browse Cottages</h2>
+<div class="modern-page-container">
+  <div class="modern-section">
+    <h2>🏠 Browse Cottages</h2>
 
-  <!-- Search and Filter -->
-  <div class="search-box">
-    <input
-      type="text"
-      [(ngModel)]="searchName"
-      placeholder="Search by name..."
-      class="search-input"
-    />
-    <input
-      type="text"
-      [(ngModel)]="searchLocation"
-      placeholder="Search by location..."
-      class="search-input"
-    />
-    <button (click)="onSearch()" class="search-btn">Search</button>
-  </div>
+    <!-- Search and Filter -->
+    <div class="search-box">
+      <input
+        type="text"
+        [(ngModel)]="searchName"
+        placeholder="Search by name..."
+        class="search-input"
+      />
+      <input
+        type="text"
+        [(ngModel)]="searchLocation"
+        placeholder="Search by location..."
+        class="search-input"
+      />
+      <button (click)="onSearch()" class="search-btn">Search</button>
+    </div>
 
-  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
-  <div *ngIf="isLoading" class="loading">Loading cottages...</div>
+    <div *ngIf="isLoading" class="loading">Loading cottages...</div>
 
-  <div *ngIf="!isLoading && cottages.length === 0" class="no-data">
-    No cottages found.
-  </div>
+    <div *ngIf="!isLoading && cottages.length === 0" class="no-data">
+      No cottages found.
+    </div>
 
-  <!-- Cottages Table -->
-  <table *ngIf="!isLoading && cottages.length > 0" class="cottages-table">
-    <thead>
-      <tr>
-        <th (click)="onSort('name')" class="sortable">
-          Name {{ getSortIcon("name") }}
-        </th>
-        <th (click)="onSort('location')" class="sortable">
-          Location {{ getSortIcon("location") }}
-        </th>
-        <th>Description</th>
-        <th>Summer Price</th>
-        <th>Winter Price</th>
-        <th>Capacity</th>
-        <th>Rating</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let cottage of cottages">
-        <td>
-          <a (click)="viewDetails(cottage._id!)" class="cottage-link">
-            {{ cottage.name }}
-          </a>
-        </td>
-        <td>{{ cottage.location }}</td>
-        <td>{{ cottage.description || "N/A" }}</td>
-        <td>
-          {{ cottage.summerPrice | currency : "USD" }} <small>(May-Aug)</small>
-        </td>
-        <td>
-          {{ cottage.winterPrice | currency : "USD" }} <small>(Sep-Apr)</small>
-        </td>
-        <td>{{ cottage.capacity }} guests</td>
-        <td class="rating-cell">
-          <div class="rating-display">
-            <div class="stars">
-              <span
-                *ngFor="let star of getStars(cottage.averageRating || 0)"
-                class="star"
-                [class.full]="star === 'full'"
-                [class.half]="star === 'half'"
-                [class.empty]="star === 'empty'"
-              >
-                ★
+    <!-- Cottages Table -->
+    <table *ngIf="!isLoading && cottages.length > 0" class="cottages-table">
+      <thead>
+        <tr>
+          <th (click)="onSort('name')" class="sortable">
+            Name {{ getSortIcon("name") }}
+          </th>
+          <th (click)="onSort('location')" class="sortable">
+            Location {{ getSortIcon("location") }}
+          </th>
+          <th>Description</th>
+          <th>Summer Price</th>
+          <th>Winter Price</th>
+          <th>Capacity</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cottage of cottages">
+          <td>
+            <a (click)="viewDetails(cottage._id!)" class="cottage-link">
+              {{ cottage.name }}
+            </a>
+          </td>
+          <td>{{ cottage.location }}</td>
+          <td>{{ cottage.description || "N/A" }}</td>
+          <td>
+            {{ cottage.summerPrice | currency : "USD" }}
+            <small>(May-Aug)</small>
+          </td>
+          <td>
+            {{ cottage.winterPrice | currency : "USD" }}
+            <small>(Sep-Apr)</small>
+          </td>
+          <td>{{ cottage.capacity }} guests</td>
+          <td class="rating-cell">
+            <div class="rating-display">
+              <div class="stars">
+                <span
+                  *ngFor="let star of getStars(cottage.averageRating || 0)"
+                  class="star"
+                  [class.full]="star === 'full'"
+                  [class.half]="star === 'half'"
+                  [class.empty]="star === 'empty'"
+                >
+                  ★
+                </span>
+              </div>
+              <span class="rating-number">
+                {{ cottage.averageRating || 0 | number : "1.1-1" }}
               </span>
+              <span class="rating-count">({{ cottage.ratingCount || 0 }})</span>
             </div>
-            <span class="rating-number">
-              {{ cottage.averageRating || 0 | number : "1.1-1" }}
-            </span>
-            <span class="rating-count">({{ cottage.ratingCount || 0 }})</span>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

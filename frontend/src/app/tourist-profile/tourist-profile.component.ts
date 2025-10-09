@@ -57,10 +57,24 @@ export class TouristProfileComponent implements OnInit {
   }
 
   getProfilePictureUrl(): string {
-    if (this.currentUser?.profilePicture) {
-      return `http://localhost:4000${this.currentUser.profilePicture}`;
+    const defaultUrl = 'http://localhost:4000/uploads/default/defaultphoto.jpg';
+
+    if (
+      this.currentUser?.profilePicture &&
+      this.currentUser.profilePicture !== '/uploads/default/defaultphoto.jpg'
+    ) {
+      const customUrl = `http://localhost:4000${this.currentUser.profilePicture}`;
+      console.log('Using custom profile picture:', customUrl);
+      return customUrl;
     }
-    return 'assets/default-avatar.png';
+
+    console.log('Using default profile picture:', defaultUrl);
+    return defaultUrl;
+  }
+
+  onImageError(event: any): void {
+    // If the custom image fails to load, fall back to default
+    event.target.src = 'http://localhost:4000/uploads/default/defaultphoto.jpg';
   }
 
   toggleEdit(): void {

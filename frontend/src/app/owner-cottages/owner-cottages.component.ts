@@ -323,6 +323,17 @@ export class OwnerCottagesComponent implements OnInit {
   }
 
   getImageUrl(imagePath: string): string {
-    return `http://localhost:4000${imagePath}`;
+    // If imagePath already starts with /uploads, use it as is
+    if (imagePath.startsWith('/uploads')) {
+      return `http://localhost:4000${imagePath}`;
+    }
+    // Otherwise, assume it's just a filename and prepend the cottages path
+    return `http://localhost:4000/uploads/cottages/${imagePath}`;
+  }
+
+  onImageError(event: any): void {
+    // Fallback to default cottage image if the image fails to load
+    event.target.src =
+      'http://localhost:4000/uploads/cottages/default-cottage.jpg';
   }
 }

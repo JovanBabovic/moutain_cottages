@@ -5,12 +5,16 @@ import fs from "fs";
 // Create uploads directories if they don't exist
 const profilesDir = path.join(__dirname, "../../uploads/profiles");
 const cottagesDir = path.join(__dirname, "../../uploads/cottages");
+const defaultDir = path.join(__dirname, "../../uploads/default");
 
 if (!fs.existsSync(profilesDir)) {
   fs.mkdirSync(profilesDir, { recursive: true });
 }
 if (!fs.existsSync(cottagesDir)) {
   fs.mkdirSync(cottagesDir, { recursive: true });
+}
+if (!fs.existsSync(defaultDir)) {
+  fs.mkdirSync(defaultDir, { recursive: true });
 }
 
 // Configure storage for profile pictures

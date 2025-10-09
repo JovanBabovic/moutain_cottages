@@ -157,6 +157,12 @@ export class OwnerProfileComponent implements OnInit {
     if (this.currentUser?.profilePicture) {
       return `http://localhost:4000${this.currentUser.profilePicture}`;
     }
-    return 'http://localhost:4000/uploads/default-profile.png';
+    return 'http://localhost:4000/uploads/profiles/defaultphoto.jpg';
+  }
+
+  onImageError(event: any): void {
+    // Fallback to default image if profile image fails to load
+    event.target.src =
+      'http://localhost:4000/uploads/profiles/defaultphoto.jpg';
   }
 }

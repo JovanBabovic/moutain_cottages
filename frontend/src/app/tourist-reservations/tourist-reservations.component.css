@@ -1,165 +1,237 @@
+/* Modern Tourist Reservations Dark Theme */
 .reservations-container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 20px auto;
   padding: 20px;
+  background: transparent;
+  color: #ffffff;
 }
 
 h2 {
   text-align: center;
-  margin-bottom: 30px;
-  color: #333;
+  margin-bottom: 40px;
+  color: #ffffff;
+  background: linear-gradient(45deg, #64ffda, #448aff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 2.2rem;
+  font-weight: 700;
 }
 
 .reservations-section {
-  margin-bottom: 50px;
+  margin-bottom: 60px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 30px;
 }
 
 .reservations-section h3 {
-  color: #4caf50;
-  border-bottom: 2px solid #4caf50;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
+  color: #64ffda;
+  border-bottom: 2px solid rgba(100, 255, 218, 0.3);
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .reservations-table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
   overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .reservations-table thead {
-  background-color: #4caf50;
-  color: white;
+  background: rgba(100, 255, 218, 0.1);
 }
 
-.reservations-table th,
-.reservations-table td {
-  padding: 15px;
+.reservations-table th {
+  padding: 20px 15px;
   text-align: left;
+  color: #64ffda;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.reservations-table td {
+  padding: 18px 15px;
+  color: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.95rem;
 }
 
 .reservations-table tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .reservations-table tbody tr:hover {
-  background-color: #f0f0f0;
+  background: rgba(255, 255, 255, 0.08);
+  transform: scale(1.01);
+  transition: all 0.3s ease;
 }
 
 .status-badge {
-  padding: 5px 12px;
-  border-radius: 20px;
-  font-size: 0.85em;
-  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-size: 0.8rem;
+  font-weight: 600;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  backdrop-filter: blur(10px);
 }
 
 .status-badge.confirmed {
-  background-color: #4caf50;
-  color: white;
+  background: rgba(76, 175, 80, 0.2);
+  color: #4caf50;
+  border: 1px solid rgba(76, 175, 80, 0.3);
 }
 
 .status-badge.pending {
-  background-color: #ff9800;
-  color: white;
+  background: rgba(255, 152, 0, 0.2);
+  color: #ff9800;
+  border: 1px solid rgba(255, 152, 0, 0.3);
 }
 
 .status-badge.cancelled {
-  background-color: #f44336;
-  color: white;
+  background: rgba(244, 67, 54, 0.2);
+  color: #f44336;
+  border: 1px solid rgba(244, 67, 54, 0.3);
 }
 
 .rejection-note {
-  margin-top: 8px;
-  padding: 8px;
-  background-color: #ffebee;
-  border-left: 3px solid #f44336;
-  font-size: 0.9em;
-  color: #c62828;
-  border-radius: 3px;
+  margin-top: 12px;
+  padding: 12px 16px;
+  background: rgba(255, 82, 82, 0.1);
+  border-left: 3px solid #ff5252;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #ff5252;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 82, 82, 0.2);
 }
 
 .btn-cancel {
-  padding: 8px 16px;
-  background-color: #f44336;
-  color: white;
-  border: none;
-  border-radius: 5px;
+  padding: 10px 18px;
+  background: rgba(244, 67, 54, 0.2);
+  color: #f44336;
+  border: 1px solid rgba(244, 67, 54, 0.3);
+  border-radius: 10px;
   cursor: pointer;
-  font-weight: bold;
-  transition: all 0.3s;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
 }
 
 .btn-cancel:hover {
-  background-color: #d32f2f;
+  background: rgba(244, 67, 54, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(244, 67, 54, 0.3);
 }
 
 .btn-rate {
-  padding: 8px 16px;
-  background-color: #2196f3;
-  color: white;
+  padding: 10px 18px;
+  background: linear-gradient(45deg, #64ffda, #448aff);
+  color: #000;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
-  font-weight: bold;
-  transition: all 0.3s;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
 }
 
 .btn-rate:hover {
-  background-color: #1976d2;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(100, 255, 218, 0.4);
 }
 
 .no-action,
 .already-rated {
-  color: #999;
+  color: rgba(255, 255, 255, 0.5);
   font-style: italic;
+  font-size: 0.9rem;
 }
 
 .has-rating {
   color: #4caf50;
-  font-weight: bold;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.has-rating::before {
+  content: "⭐";
+  font-size: 0.9rem;
 }
 
 .no-rating {
-  color: #999;
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
 }
 
 .loading {
   text-align: center;
-  padding: 40px;
-  font-size: 1.2em;
-  color: #666;
+  padding: 80px;
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
 }
 
 .no-data {
   text-align: center;
-  padding: 40px;
-  background: #f5f5f5;
-  border-radius: 8px;
-  color: #999;
+  padding: 60px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 15px;
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 1.1rem;
+  backdrop-filter: blur(10px);
 }
 
 .success-message {
   color: #4caf50;
-  background-color: #e8f5e9;
-  padding: 15px;
-  border-radius: 5px;
-  margin-bottom: 20px;
+  background: rgba(76, 175, 80, 0.1);
+  border: 1px solid rgba(76, 175, 80, 0.3);
+  padding: 18px 24px;
+  border-radius: 12px;
+  margin-bottom: 25px;
   text-align: center;
-  font-weight: bold;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
 }
 
 .error-message {
-  color: #f44336;
-  background-color: #ffebee;
-  padding: 15px;
-  border-radius: 5px;
-  margin-bottom: 20px;
+  color: #ff5252;
+  background: rgba(255, 82, 82, 0.1);
+  border: 1px solid rgba(255, 82, 82, 0.3);
+  padding: 18px 24px;
+  border-radius: 12px;
+  margin-bottom: 25px;
   text-align: center;
-  font-weight: bold;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
 }
 
 /* Modal Styles */
@@ -169,166 +241,272 @@ h2 {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  backdrop-filter: blur(5px);
 }
 
 .modal-content {
-  background: white;
-  border-radius: 8px;
+  background: rgba(26, 26, 46, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
   width: 90%;
-  max-width: 600px;
+  max-width: 700px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
 }
 
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  border-bottom: 1px solid #ddd;
+  padding: 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .modal-header h3 {
   margin: 0;
-  color: #333;
+  color: #ffffff;
+  font-size: 1.4rem;
+  background: linear-gradient(45deg, #64ffda, #448aff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .close-btn {
-  background: none;
-  border: none;
-  font-size: 2em;
-  color: #999;
+  background: rgba(255, 82, 82, 0.2);
+  border: 1px solid rgba(255, 82, 82, 0.3);
+  border-radius: 50%;
+  font-size: 18px;
   cursor: pointer;
+  color: #ff5252;
+  padding: 0;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
   line-height: 1;
-  transition: color 0.3s;
 }
 
 .close-btn:hover {
-  color: #333;
+  background: rgba(255, 82, 82, 0.3);
+  transform: scale(1.1);
 }
 
 .modal-body {
-  padding: 20px;
+  padding: 25px;
 }
 
 .reservation-info {
-  background: #f5f5f5;
-  padding: 15px;
-  border-radius: 5px;
-  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .reservation-info p {
-  margin: 5px 0;
+  margin: 8px 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
 }
 
 .rating-input {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   text-align: center;
 }
 
 .rating-input label {
   display: block;
-  margin-bottom: 10px;
-  font-weight: bold;
-  color: #555;
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
 }
 
 .star-rating {
   display: flex;
   justify-content: center;
-  gap: 5px;
-  margin: 15px 0;
+  gap: 8px;
+  margin: 20px 0;
 }
 
 .star {
-  font-size: 3em;
-  color: #ddd;
+  font-size: 2.5rem;
+  color: rgba(255, 255, 255, 0.3);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
 }
 
 .star.filled {
   color: #ffd700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
 .star:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
 }
 
 .rating-label {
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #333;
-  margin: 10px 0 0 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #64ffda;
+  margin: 15px 0 0 0;
 }
 
 .comment-input {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .comment-input label {
   display: block;
-  margin-bottom: 10px;
-  font-weight: bold;
-  color: #555;
+  margin-bottom: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
 }
 
 .form-control {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 1em;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 0.95rem;
   font-family: inherit;
   resize: vertical;
   box-sizing: border-box;
+  transition: all 0.3s ease;
 }
 
 .form-control:focus {
   outline: none;
-  border-color: #4caf50;
+  border-color: #64ffda;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 15px rgba(100, 255, 218, 0.3);
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .modal-footer {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
-  padding: 20px;
-  border-top: 1px solid #ddd;
+  gap: 15px;
+  padding: 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .btn-primary,
 .btn-secondary {
-  padding: 10px 20px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 5px;
-  font-size: 1em;
-  font-weight: bold;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .btn-primary {
-  background-color: #4caf50;
-  color: white;
+  background: linear-gradient(45deg, #64ffda, #448aff);
+  color: #000;
 }
 
 .btn-primary:hover {
-  background-color: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(100, 255, 218, 0.4);
 }
 
 .btn-secondary {
-  background-color: #666;
-  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .btn-secondary:hover {
-  background-color: #555;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .reservations-container {
+    margin: 15px;
+    padding: 15px;
+  }
+
+  .reservations-section {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .reservations-table {
+    font-size: 0.85rem;
+  }
+
+  .reservations-table th,
+  .reservations-table td {
+    padding: 12px 8px;
+  }
+
+  .star {
+    font-size: 2rem;
+  }
+
+  .modal-content {
+    margin: 10px;
+    max-width: none;
+  }
+
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding: 20px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  .reservations-section h3 {
+    font-size: 1.2rem;
+  }
+
+  .reservations-table {
+    font-size: 0.8rem;
+  }
+
+  .reservations-table th,
+  .reservations-table td {
+    padding: 10px 6px;
+  }
+
+  .btn-cancel,
+  .btn-rate {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+
+  .star {
+    font-size: 1.8rem;
+    gap: 6px;
+  }
 }

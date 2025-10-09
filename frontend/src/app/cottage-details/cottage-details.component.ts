@@ -254,4 +254,23 @@ export class CottageDetailsComponent implements OnInit, AfterViewInit {
   goBack(): void {
     this.router.navigate(['/tourist-cottages']);
   }
+
+  switchMainImage(imageName: string): void {
+    if (this.cottage && this.cottage.images) {
+      // Move clicked image to first position
+      const currentImages = [...this.cottage.images];
+      const clickedIndex = currentImages.indexOf(imageName);
+      if (clickedIndex > -1) {
+        currentImages.splice(clickedIndex, 1);
+        currentImages.unshift(imageName);
+        this.cottage.images = currentImages;
+      }
+    }
+  }
+
+  onImageError(event: any): void {
+    // Fallback to default image if cottage image fails to load
+    event.target.src =
+      'http://localhost:4000/uploads/cottages/default-cottage.jpg';
+  }
 }

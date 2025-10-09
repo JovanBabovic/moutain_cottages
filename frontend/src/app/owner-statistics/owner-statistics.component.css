@@ -1,76 +1,124 @@
+/* Modern Owner Statistics Dark Theme */
 .statistics-container {
   padding: 30px;
   max-width: 1400px;
   margin: 0 auto;
+  background: transparent;
+  color: #ffffff;
 }
 
 h2 {
-  color: #2c3e50;
-  margin-bottom: 30px;
-  font-size: 28px;
-  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(45deg, #ffa726, #ff6b6b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 40px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
 }
 
 .loading,
 .error {
   text-align: center;
-  padding: 40px;
-  font-size: 18px;
+  padding: 60px;
+  font-size: 1.2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.loading {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .error {
-  color: #e74c3c;
+  color: #ff5252;
+  background: rgba(255, 82, 82, 0.1);
+  border: 1px solid rgba(255, 82, 82, 0.3);
 }
 
 .filter-section {
-  margin-bottom: 30px;
-  padding: 20px;
-  background: #f8f9fa;
-  border-radius: 8px;
+  margin-bottom: 40px;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .filter-section label {
   font-weight: 600;
-  color: #2c3e50;
-  font-size: 16px;
+  color: #ffa726;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
 .cottage-select {
-  padding: 10px 15px;
-  border: 2px solid #ddd;
-  border-radius: 6px;
-  font-size: 15px;
-  min-width: 250px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 1rem;
+  min-width: 280px;
   cursor: pointer;
-  background: white;
-  transition: border-color 0.3s;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
 }
 
 .cottage-select:hover {
-  border-color: #3498db;
+  border-color: #ffa726;
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .cottage-select:focus {
   outline: none;
-  border-color: #3498db;
-  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  border-color: #ffa726;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 15px rgba(255, 167, 38, 0.3);
+}
+
+.cottage-select option {
+  background: #1a1a2e;
+  color: #ffffff;
+  padding: 8px;
 }
 
 .charts-container {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 50px;
 }
 
 .chart-wrapper {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   overflow-x: auto;
+  position: relative;
+}
+
+.chart-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(45deg, #ffa726, #ff6b6b);
+  border-radius: 20px 20px 0 0;
 }
 
 .chart-canvas {
@@ -78,32 +126,51 @@ h2 {
   margin: 0 auto;
   max-width: 100%;
   height: auto;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
 }
 
 .no-data {
   text-align: center;
-  padding: 60px 20px;
-  background: #f8f9fa;
-  border-radius: 12px;
-  margin-top: 30px;
+  padding: 80px 30px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  margin-top: 40px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
 .no-data p {
-  color: #666;
-  font-size: 16px;
-  margin: 10px 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.1rem;
+  margin: 15px 0;
+  line-height: 1.6;
 }
 
 .no-data p:first-child {
   font-weight: 600;
-  color: #2c3e50;
-  font-size: 18px;
+  color: #ffa726;
+  font-size: 1.3rem;
+  background: linear-gradient(45deg, #ffa726, #ff6b6b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Chart.js Dark Theme Overrides */
+:host ::ng-deep .chart-wrapper canvas {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border-radius: 12px;
 }
 
 /* Responsive design */
 @media (max-width: 1200px) {
+  .statistics-container {
+    padding: 25px;
+  }
+
   .chart-wrapper {
-    padding: 20px;
+    padding: 30px;
   }
 
   .chart-canvas {
@@ -118,19 +185,60 @@ h2 {
   }
 
   h2 {
-    font-size: 24px;
+    font-size: 1.8rem;
   }
 
   .filter-section {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    gap: 15px;
+    padding: 20px;
+  }
+
+  .filter-section label {
+    text-align: center;
   }
 
   .cottage-select {
     width: 100%;
+    min-width: auto;
+  }
+
+  .chart-wrapper {
+    padding: 20px;
+  }
+
+  .charts-container {
+    gap: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .statistics-container {
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 1.6rem;
   }
 
   .chart-wrapper {
     padding: 15px;
+  }
+
+  .filter-section {
+    padding: 15px;
+  }
+
+  .no-data {
+    padding: 60px 20px;
+  }
+
+  .no-data p:first-child {
+    font-size: 1.1rem;
+  }
+
+  .no-data p {
+    font-size: 1rem;
   }
 }

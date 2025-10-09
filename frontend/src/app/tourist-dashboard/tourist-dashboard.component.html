@@ -1,39 +1,64 @@
-<div class="tourist-dashboard">
-  <header>
-    <h2>Tourist Dashboard</h2>
-    <div class="header-right">
-      <span *ngIf="currentUser" class="user-name">
-        {{ currentUser.firstName }} {{ currentUser.lastName }}
-      </span>
-      <button class="logout-btn" (click)="logout()">Logout</button>
-    </div>
-  </header>
+<div class="modern-dashboard">
+  <!-- Hero Header -->
+  <div class="hero-header">
+    <div class="header-content">
+      <div class="brand-section">
+        <h1 class="dashboard-title">🏔️ Tourist Portal</h1>
+        <p class="dashboard-subtitle">
+          Discover & Book Amazing Mountain Retreats
+        </p>
+      </div>
 
-  <nav class="main-menu">
-    <button
-      (click)="navigateTo('profile')"
-      [class.active]="activeSection === 'profile'"
-      class="menu-item"
-    >
-      Profile
-    </button>
-    <button
-      (click)="navigateTo('cottages')"
-      [class.active]="activeSection === 'cottages'"
-      class="menu-item"
-    >
-      Cottages
-    </button>
-    <button
-      (click)="navigateTo('reservations')"
-      [class.active]="activeSection === 'reservations'"
-      class="menu-item"
-    >
-      Reservations
-    </button>
+      <div class="user-section">
+        <div class="user-info" *ngIf="currentUser">
+          <div class="user-avatar">👤</div>
+          <div class="user-details">
+            <div class="user-name">
+              {{ currentUser.firstName }} {{ currentUser.lastName }}
+            </div>
+            <div class="user-role">Tourist Member</div>
+          </div>
+        </div>
+        <button class="modern-logout-btn" (click)="logout()">
+          <span class="btn-icon">🚪</span>
+          Sign Out
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Menu -->
+  <nav class="modern-nav">
+    <div class="nav-container">
+      <button
+        (click)="navigateTo('profile')"
+        [class.active]="activeSection === 'profile'"
+        class="nav-tab"
+      >
+        <span class="tab-icon">👤</span>
+        <span class="tab-text">My Profile</span>
+      </button>
+      <button
+        (click)="navigateTo('cottages')"
+        [class.active]="activeSection === 'cottages'"
+        class="nav-tab"
+      >
+        <span class="tab-icon">🏠</span>
+        <span class="tab-text">Browse Cottages</span>
+      </button>
+      <button
+        (click)="navigateTo('reservations')"
+        [class.active]="activeSection === 'reservations'"
+        class="nav-tab"
+      >
+        <span class="tab-icon">📅</span>
+        <span class="tab-text">My Bookings</span>
+      </button>
+    </div>
   </nav>
 
-  <div class="content">
+  <!-- Main Content -->
+  <div class="modern-content">
     <router-outlet></router-outlet>
   </div>
 </div>

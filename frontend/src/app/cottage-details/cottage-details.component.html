@@ -7,16 +7,41 @@
   <div class="details-grid">
     <!-- Left Column: Main Info -->
     <div class="main-info">
-      <!-- Image Gallery Placeholder -->
+      <!-- Image Gallery -->
       <div class="image-gallery">
-        <div class="main-image">
-          <p class="image-placeholder">
-            📷 Image Gallery ({{
-              cottage.images && cottage.images.length > 0
-                ? cottage.images.length + " images"
-                : "No images available"
-            }})
-          </p>
+        <div
+          class="main-image"
+          *ngIf="cottage.images && cottage.images.length > 0"
+        >
+          <img
+            [src]="
+              'http://localhost:4000/uploads/cottages/' + cottage.images[0]
+            "
+            [alt]="cottage.name"
+            class="cottage-image"
+            (error)="onImageError($event)"
+          />
+        </div>
+        <div
+          class="main-image"
+          *ngIf="!cottage.images || cottage.images.length === 0"
+        >
+          <p class="image-placeholder">📷 No images available</p>
+        </div>
+
+        <!-- Additional images thumbnails (if multiple images) -->
+        <div
+          class="image-thumbnails"
+          *ngIf="cottage.images && cottage.images.length > 1"
+        >
+          <img
+            *ngFor="let image of cottage.images.slice(1, 4); let i = index"
+            [src]="'http://localhost:4000/uploads/cottages/' + image"
+            [alt]="cottage.name + ' - Image ' + (i + 2)"
+            class="thumbnail-image"
+            (click)="switchMainImage(image)"
+            (error)="onImageError($event)"
+          />
         </div>
       </div>
 

@@ -1,110 +1,206 @@
-<div class="home-container">
-  <header class="home-header">
-    <h1>Mountain Cottage</h1>
-    <p>Discover Your Perfect Mountain Retreat</p>
-    <div class="header-links">
-      <a routerLink="/login" class="btn btn-primary">Login</a>
-      <a routerLink="/register" class="btn btn-secondary">Register</a>
-      <a routerLink="/change-password" class="btn btn-link">Change Password</a>
+<!-- Hero Section with Navigation -->
+<div class="hero-section">
+  <nav class="top-nav">
+    <div class="nav-brand">
+      <h1>🏔️ Reserve your Cottages</h1>
     </div>
-  </header>
+    <div class="nav-actions">
+      <a routerLink="/login" class="nav-btn login-btn">
+        <i class="icon">👤</i> Sign In
+      </a>
+      <a routerLink="/register" class="nav-btn register-btn">
+        <i class="icon">✨</i> Register
+      </a>
+      <a routerLink="/change-password" class="nav-btn password-btn">
+        <i class="icon">🔑</i> Reset Password
+      </a>
+    </div>
+  </nav>
 
-  <!-- Statistics Section -->
-  <section class="statistics-section">
-    <h2>Platform Statistics</h2>
-    <div *ngIf="isLoadingStats" class="loading">Loading statistics...</div>
-    <div *ngIf="!isLoadingStats && statistics" class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-number">{{ statistics.totalCottages }}</div>
-        <div class="stat-label">Total Cottages</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">{{ statistics.totalOwners }}</div>
-        <div class="stat-label">Registered Owners</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">{{ statistics.totalTourists }}</div>
-        <div class="stat-label">Registered Tourists</div>
-      </div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <h2 class="hero-title">Escape to Mountain Paradise</h2>
+      <p class="hero-subtitle">
+        Find your perfect alpine getaway among Serbia's most stunning mountain
+        cottages
+      </p>
     </div>
 
-    <div *ngIf="!isLoadingStats && statistics" class="reservation-stats">
-      <h3>Recent Reservations</h3>
-      <div class="reservation-grid">
-        <div class="reservation-card">
-          <div class="res-number">
+    <!-- Inline Stats -->
+    <div class="hero-stats" *ngIf="!isLoadingStats && statistics">
+      <div class="hero-stat">
+        <span class="stat-icon">🏠</span>
+        <div class="stat-info">
+          <div class="stat-value">{{ statistics.totalCottages }}</div>
+          <div class="stat-text">Premium Cottages</div>
+        </div>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-icon">👥</span>
+        <div class="stat-info">
+          <div class="stat-value">
+            {{ statistics.totalOwners + statistics.totalTourists }}
+          </div>
+          <div class="stat-text">Happy Members</div>
+        </div>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-icon">📅</span>
+        <div class="stat-info">
+          <div class="stat-value">{{ statistics.reservations.last30Days }}</div>
+          <div class="stat-text">Recent Bookings</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+  <!-- Activity Dashboard -->
+  <section class="activity-section" *ngIf="!isLoadingStats && statistics">
+    <div class="section-header">
+      <h3>📊 Live Activity</h3>
+      <p>Real-time booking statistics</p>
+    </div>
+
+    <div class="activity-timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot pulse"></div>
+        <div class="timeline-content">
+          <div class="timeline-number">
             {{ statistics.reservations.last24Hours }}
           </div>
-          <div class="res-label">Last 24 Hours</div>
+          <div class="timeline-label">Bookings Today</div>
         </div>
-        <div class="reservation-card">
-          <div class="res-number">{{ statistics.reservations.last7Days }}</div>
-          <div class="res-label">Last 7 Days</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-number">
+            {{ statistics.reservations.last7Days }}
+          </div>
+          <div class="timeline-label">This Week</div>
         </div>
-        <div class="reservation-card">
-          <div class="res-number">{{ statistics.reservations.last30Days }}</div>
-          <div class="res-label">Last 30 Days</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-number">
+            {{ statistics.reservations.last30Days }}
+          </div>
+          <div class="timeline-label">This Month</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Cottages Section -->
-  <section class="cottages-section">
-    <h2>Available Cottages</h2>
-
-    <!-- Search and Filter -->
-    <div class="search-box">
-      <input
-        type="text"
-        [(ngModel)]="searchName"
-        placeholder="Search by name..."
-        class="search-input"
-      />
-      <input
-        type="text"
-        [(ngModel)]="searchLocation"
-        placeholder="Search by location..."
-        class="search-input"
-      />
-      <button (click)="onSearch()" class="search-btn">Search</button>
+  <!-- Cottage Explorer -->
+  <section class="explorer-section">
+    <div class="section-header">
+      <h3>🔍 Discover Cottages</h3>
+      <p>Browse our collection of mountain retreats</p>
     </div>
 
-    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-
-    <div *ngIf="isLoadingCottages" class="loading">Loading cottages...</div>
-
-    <div *ngIf="!isLoadingCottages && cottages.length === 0" class="no-data">
-      No cottages found.
+    <!-- Advanced Search -->
+    <div class="search-panel">
+      <div class="search-group">
+        <div class="input-wrapper">
+          <span class="input-icon">🏠</span>
+          <input
+            type="text"
+            [(ngModel)]="searchName"
+            placeholder="Cottage name..."
+            class="modern-input"
+          />
+        </div>
+        <div class="input-wrapper">
+          <span class="input-icon">📍</span>
+          <input
+            type="text"
+            [(ngModel)]="searchLocation"
+            placeholder="Location..."
+            class="modern-input"
+          />
+        </div>
+        <button (click)="onSearch()" class="search-action-btn">
+          <span class="btn-icon">🔎</span>
+          Explore
+        </button>
+      </div>
     </div>
 
-    <!-- Cottages Table -->
-    <table
-      *ngIf="!isLoadingCottages && cottages.length > 0"
-      class="cottages-table"
+    <!-- Status Messages -->
+    <div *ngIf="errorMessage" class="status-message error">
+      <span class="status-icon">⚠️</span>
+      {{ errorMessage }}
+    </div>
+
+    <div *ngIf="isLoadingCottages" class="status-message loading">
+      <span class="status-icon spinning">⏳</span>
+      Discovering amazing cottages...
+    </div>
+
+    <div
+      *ngIf="!isLoadingCottages && cottages.length === 0"
+      class="status-message empty"
     >
-      <thead>
-        <tr>
-          <th (click)="onSort('name')" class="sortable">
-            Name {{ getSortIcon("name") }}
-          </th>
-          <th (click)="onSort('location')" class="sortable">
-            Location {{ getSortIcon("location") }}
-          </th>
-          <th>Description</th>
-          <th>Price/Night</th>
-          <th>Capacity</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let cottage of cottages">
-          <td>{{ cottage.name }}</td>
-          <td>{{ cottage.location }}</td>
-          <td>{{ cottage.description || "N/A" }}</td>
-          <td>{{ cottage.pricePerNight | currency : "EUR" }}</td>
-          <td>{{ cottage.capacity }} guests</td>
-        </tr>
-      </tbody>
-    </table>
+      <span class="status-icon">🔍</span>
+      No cottages match your search. Try different criteria!
+    </div>
+
+    <!-- Cottage Cards Grid -->
+    <div
+      *ngIf="!isLoadingCottages && cottages.length > 0"
+      class="cottages-grid"
+    >
+      <div *ngFor="let cottage of cottages" class="cottage-card">
+        <div class="card-header">
+          <h4 class="cottage-name">{{ cottage.name }}</h4>
+          <div class="cottage-location">
+            <span class="location-icon">📍</span>
+            {{ cottage.location }}
+          </div>
+        </div>
+
+        <div class="card-body">
+          <p class="cottage-description">
+            {{ cottage.description || "Beautiful mountain retreat" }}
+          </p>
+
+          <div class="cottage-details">
+            <div class="detail-item">
+              <span class="detail-icon">💰</span>
+              <span class="detail-text"
+                >{{ cottage.pricePerNight | currency : "EUR" }}/night</span
+              >
+            </div>
+            <div class="detail-item">
+              <span class="detail-icon">👥</span>
+              <span class="detail-text">{{ cottage.capacity }} guests</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <div class="sort-controls">
+            <button
+              (click)="onSort('name')"
+              class="sort-btn"
+              [class.active]="sortBy === 'name'"
+            >
+              Name {{ getSortIcon("name") }}
+            </button>
+            <button
+              (click)="onSort('location')"
+              class="sort-btn"
+              [class.active]="sortBy === 'location'"
+            >
+              Location {{ getSortIcon("location") }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 </div>

@@ -32,6 +32,7 @@
           [src]="getImageUrl(cottage.images[0])"
           [alt]="cottage.name"
           class="cottage-image"
+          (error)="onImageError($event)"
         />
         <div
           *ngIf="!cottage.images || cottage.images.length === 0"
